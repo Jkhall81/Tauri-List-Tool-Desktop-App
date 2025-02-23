@@ -6,8 +6,8 @@ use std::fs;
 use regex::Regex;
 use csv::{ReaderBuilder, WriterBuilder};
 
-pub fn generate_final_report(output_dir: &str, source_file: &str) -> Result<(), Box<dyn Error>> {
-    println!("Looking for extractedNumbers file in: {}", output_dir);
+pub fn generate_final_file(output_dir: &str, source_file: &str) -> Result<(), Box<dyn Error>> {
+    // println!("Looking for extractedNumbers file in: {}", output_dir);
 
     // Debug: Print all files in output_dir
     // for entry in fs::read_dir(output_dir)? {
@@ -113,7 +113,7 @@ pub fn generate_final_report(output_dir: &str, source_file: &str) -> Result<(), 
     Ok(())
 }
 
-fn filter_dnc_numbers(
+pub fn filter_dnc_numbers(
     extracted_file: &str,
     all_clean_file: &str,
     federal_dnc_file: &str,
@@ -136,7 +136,7 @@ fn filter_dnc_numbers(
     Ok(dnc_map)
 }
 
-fn read_csv_to_phone_map(file_path: &str) -> Result<HashMap<String, u32>, Box<dyn Error>> {
+pub fn read_csv_to_phone_map(file_path: &str) -> Result<HashMap<String, u32>, Box<dyn Error>> {
     let mut phone_map: HashMap<String, u32> = HashMap::new();
 
     // Open file
