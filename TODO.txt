@@ -1,5 +1,5 @@
 //1. make the left sidebar wider.  Tab text is getting scrunched.
-2. Set an initial min width for the outer container of the application, to make it bigger than it is now.
+//2. Set an initial min width for the outer container of the application, to make it bigger than it is now.
 //3. Make some dummy data files to test this out.
 4. Add Rust backend code for the phone number extraction / BLA upload file creation, create final file, create DNC file, generate email report, and etc.
 
