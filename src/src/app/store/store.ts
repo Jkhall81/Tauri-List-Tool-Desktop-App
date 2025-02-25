@@ -14,6 +14,14 @@ type AppState = {
   setAbbr: (abbr: string) => void;
   setColor: (color: string) => void;
 
+  // BUTTON MESSAGES
+  blaUploadMessage: string;
+  createFinalFileMessage: string;
+  createDNCFileMessage: string;
+  setBlaUploadMessage: (blaUploadMessage: string) => void;
+  setCreateFinalFileMessage: (createFinalFileMessage: string) => void;
+  setCreateDNCFileMessage: (createDNCFileMessage: string) => void;
+
   // MIGHT USE THIS LATER
   displayedComponent: React.ReactNode | null;
   setDisplayedComponent: (component: React.ReactNode | null) => void;
@@ -39,6 +47,16 @@ export const useAppStore = create<AppState>((set) => ({
   color: "",
   setAbbr: (abbr) => set({ abbr }),
   setColor: (color) => set({ color }),
+
+  // BUTTON
+  blaUploadMessage: "",
+  createFinalFileMessage: "",
+  createDNCFileMessage: "",
+  setBlaUploadMessage: (uploadMessage) =>
+    set({ blaUploadMessage: uploadMessage }),
+  setCreateFinalFileMessage: (message) =>
+    set({ createFinalFileMessage: message }),
+  setCreateDNCFileMessage: (message) => set({ createDNCFileMessage: message }),
 
   // MIGHT USE THIS LATER
   displayedComponent: null,

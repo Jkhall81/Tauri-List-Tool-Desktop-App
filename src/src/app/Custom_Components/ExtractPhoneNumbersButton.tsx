@@ -1,12 +1,12 @@
 "use client";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../components/ui/button";
 import { useFileStore } from "../store/store";
 import { invoke } from "@tauri-apps/api/core";
-import { useState } from "react";
+import { useAppStore } from "../store/store";
 
 export const ExtractPhoneNumbersButton = () => {
   const { selectedSourceFile, selectedDirectory } = useFileStore();
-  const [outputFile, setOutputFile] = useState<string | null>(null);
+  const { setBlaUploadMessage } = useAppStore();
 
   const handleExtractNumbers = async () => {
     if (!selectedSourceFile || !selectedDirectory) {
@@ -19,7 +19,7 @@ export const ExtractPhoneNumbersButton = () => {
         filePath: selectedSourceFile,
         outputDir: selectedDirectory, // Pass the directory to Rust
       });
-      setOutputFile(result);
+      setBlaUploadMessage(`BLA uploadfile extracted to: ${result}`);
       console.log("Extracted file saved at:", result);
     } catch (error) {
       console.error("Error extracting phone numbers:", error);
@@ -35,12 +35,6 @@ export const ExtractPhoneNumbersButton = () => {
       >
         Create BLA Upload File
       </Button>
-
-      {outputFile && (
-        <div className="mt-2 text-sm text-gray-600">
-          Extracted file saved at: {outputFile}
-        </div>
-      )}
     </div>
   );
 };

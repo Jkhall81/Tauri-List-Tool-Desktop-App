@@ -1,12 +1,11 @@
 "use client";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../components/ui/button";
 import { useFileStore, useAppStore } from "../store/store";
 import { invoke } from "@tauri-apps/api/core";
-import { useState } from "react";
 
 export const GenerateEmailReportButton = () => {
   const { selectedSourceFile, selectedDirectory } = useFileStore();
-  const { color, abbr, emailReport, setEmailReport } = useAppStore();
+  const { color, abbr, setEmailReport } = useAppStore();
 
   const handleEmailReport = async () => {
     try {

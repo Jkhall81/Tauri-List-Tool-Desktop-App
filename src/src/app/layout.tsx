@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import { useAppStore } from "./store/store";
-import { Button } from "@/components/ui/button";
 import { DirectorySelector } from "./Custom_Components/DirectorySelector";
 import { SourceFileSelector } from "./Custom_Components/SourceFileSelector";
 import {
@@ -13,8 +12,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+} from "../components/ui/card";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../components/ui/tabs";
 import { ExtractPhoneNumbersButton } from "./Custom_Components/ExtractPhoneNumbersButton";
 import { CreateFinalFileButton } from "./Custom_Components/CreateFinalFileButton";
 import { CreateDNCFileButton } from "./Custom_Components/CreateDNCFileButton";
@@ -35,7 +39,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { activeTab, setActiveTab } = useAppStore();
+  const { setActiveTab } = useAppStore();
   return (
     <html lang="en">
       <body

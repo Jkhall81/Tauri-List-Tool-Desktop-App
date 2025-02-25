@@ -1,12 +1,7 @@
 "use client";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../components/ui/button";
 import { useFileStore } from "../store/store";
 import { open } from "@tauri-apps/plugin-dialog";
-
-interface DirectorySelectorProps {
-  openFileExplorer: () => Promise<void>;
-  selectedDirectory: string | null;
-}
 
 export const DirectorySelector = () => {
   const { selectedDirectory, setSelectedDirectory } = useFileStore();

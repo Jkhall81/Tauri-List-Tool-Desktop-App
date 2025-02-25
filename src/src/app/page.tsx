@@ -1,13 +1,22 @@
 "use client";
 
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
+import { Checkbox } from "../components/ui/checkbox";
+import { Input } from "../components/ui/input";
 import { useAppStore } from "./store/store";
 import { useState } from "react";
 
 const MainPage = () => {
-  const { activeTab, abbr, color, setAbbr, setColor, emailReport } =
-    useAppStore();
+  const {
+    activeTab,
+    abbr,
+    color,
+    setAbbr,
+    setColor,
+    blaUploadMessage,
+    emailReport,
+    createFinalFileMessage,
+    createDNCFileMessage,
+  } = useAppStore();
   const [inputError, setInputError] = useState(false);
 
   const handleAbbrChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,14 +30,10 @@ const MainPage = () => {
     }
   };
 
-  const handleCheckboxChange = (colorValue: string) => {
-    setColor(color === colorValue ? "" : colorValue);
-  };
-
   return (
     <>
       {activeTab === "dncProcessing" && (
-        <section>
+        <section className="">
           <div className="p-4 m-4 border-2 border-slate-200 w-[400px] rounded-xl">
             <h1 className="mb-4 font-bold">Email Report Options</h1>
             <p className="mb-4 text-sm">
@@ -109,6 +114,22 @@ const MainPage = () => {
                 </p>
               )}
             </div>
+          </div>
+
+          <div className="p-4 m-4 border-2 border-slate-200 w-[400px] h-[200px] rounded-xl">
+            <p>{blaUploadMessage}</p>
+            {blaUploadMessage && (
+              <div className="border-b-2 border-slate-400 py-1" />
+            )}
+            <p>{createFinalFileMessage}</p>
+            {createFinalFileMessage && (
+              <div className="border-b-2 border-slate-400 py-1" />
+            )}
+            <p>{createDNCFileMessage}</p>
+            {createDNCFileMessage && (
+              <div className="border-b-2 border-slate-400 py-1" />
+            )}
+            <p></p>
           </div>
           {
             <div className={`${!emailReport ? "hidden" : ""}`}>
