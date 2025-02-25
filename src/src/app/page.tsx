@@ -38,7 +38,8 @@ const MainPage = () => {
             <h1 className="mb-4 font-bold">Email Report Options</h1>
             <p className="mb-4 text-sm">
               Please select the proper dialer and enter the two letter campaign
-              designation 'IR', 'CK', or 'VA'.
+              designation &apos;'IR&apos;', &apos;'CK&apos;', or
+              &apos;'VA&apos;'.
             </p>
             <div>
               <Checkbox
