@@ -5,6 +5,10 @@ type AppState = {
   activeTab: string;
   setActiveTab: (tab: string) => void;
 
+  // EMAIL REPORT
+  emailReport: string | null;
+  setEmailReport: (report: string | null) => void;
+
   abbr: string;
   color: string;
   setAbbr: (abbr: string) => void;
@@ -26,6 +30,10 @@ export const useAppStore = create<AppState>((set) => ({
   // DYNAMICALLY SHOW STUFF ON PAGE BASED ON ACTIVE TAB
   activeTab: "listProcessing",
   setActiveTab: (tab) => set({ activeTab: tab }),
+
+  // EMAIL REPORT
+  emailReport: null,
+  setEmailReport: (report) => set({ emailReport: report }),
 
   abbr: "",
   color: "",

@@ -1,6 +1,10 @@
+use regex::Regex;
+use std::fs;
+use std::error::Error;
+use crate::final_file::read_csv_to_phone_map;
+use crate::final_file::filter_dnc_numbers;
 
-
-pub fn generate_email_report(source_file: &str, abbr: &str, color: &str) -> String {
+pub fn generate_email_report_file(source_file: &str, output_dir: &str, abbr: &str, color: &str) -> Result<String, Box<dyn Error>> {
 
     // Regex Fun
     let extracted_file_pattern = Regex::new(r"extractedNumbers_\d+_\d+_\d+\.csv")?;
@@ -47,6 +51,7 @@ pub fn generate_email_report(source_file: &str, abbr: &str, color: &str) -> Stri
     let dnc_len = dnc.len();
     let invalid_len = invalid.len();
     let no_carrier_len = no_carrier.len();
+    let total_dnc = fdnc_len + dnc_len;
 
     let email_report = format!(
         "
@@ -58,18 +63,10 @@ pub fn generate_email_report(source_file: &str, abbr: &str, color: &str) -> Stri
     
         Total Leads: {extracted_numbers_len}
         Total Clean: {all_clean_len}
-        Total DNC composition {fdnc_len} FDNC, {dnc_len} DNC, Total DNC: {fdnc_len + dnc_len}
+        Total DNC composition {fdnc_len} FDNC, {dnc_len} DNC, Total DNC: {total_dnc}
         No-Carrier {no_carrier_len}
         ",
         final_source_file, // Pass the variable here
-        invalid_len, 
-        no_carrier_len,
-        abbr,
-        color,
-        dnc_len,
-        fdnc_len,
-        extracted_numbers_len,
-        all_clean_len
     );
-    email_report
+    Ok(email_report)
 }

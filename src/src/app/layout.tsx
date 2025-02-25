@@ -18,6 +18,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ExtractPhoneNumbersButton } from "./Custom_Components/ExtractPhoneNumbersButton";
 import { CreateFinalFileButton } from "./Custom_Components/CreateFinalFileButton";
 import { CreateDNCFileButton } from "./Custom_Components/CreateDNCFileButton";
+import { GenerateEmailReportButton } from "./Custom_Components/GenerateEmailReportButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -88,7 +89,7 @@ export default function RootLayout({
                   <ExtractPhoneNumbersButton />
                   <CreateFinalFileButton />
                   <CreateDNCFileButton />
-                  <Button>Generate Email Report</Button>
+                  <GenerateEmailReportButton />
                 </CardContent>
                 <CardFooter></CardFooter>
               </Card>

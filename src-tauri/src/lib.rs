@@ -2,6 +2,13 @@
 mod upload_file;
 mod final_file;
 mod dnc_file;
+mod generate_email_report;
+
+#[tauri::command]
+fn email_report_handler(source_file: &str, output_dir: &str, abbr: &str, color: &str) -> Result<String, String> {
+    generate_email_report::generate_email_report_file(source_file, output_dir, abbr, color)
+        .map_err(|e| e.to_string())
+}
 
 #[tauri::command]
 fn dnc_file_handler(output_dir: &str, source_file: &str) -> Result<String, String> {
@@ -32,7 +39,7 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![greet, extract_numbers_from_file, final_file_handler, dnc_file_handler])
+        .invoke_handler(tauri::generate_handler![greet, extract_numbers_from_file, final_file_handler, dnc_file_handler, email_report_handler])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
