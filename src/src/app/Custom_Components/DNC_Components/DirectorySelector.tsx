@@ -1,6 +1,6 @@
 "use client";
-import { Button } from "../../components/ui/button";
-import { useFileStore } from "../store/store";
+import { Button } from "../../../components/ui/button";
+import { useFileStore } from "../../store/store";
 import { open } from "@tauri-apps/plugin-dialog";
 
 export const DirectorySelector = () => {

@@ -1,7 +1,7 @@
 "use client";
-import { Button } from "../../components/ui/button";
-import { useFileStore } from "../store/store";
-import { useAppStore } from "../store/store";
+import { Button } from "../../../components/ui/button";
+import { useFileStore } from "../../store/store";
+import { useAppStore } from "../../store/store";
 import { invoke } from "@tauri-apps/api/core";
 
 export const CreateFinalFileButton = () => {

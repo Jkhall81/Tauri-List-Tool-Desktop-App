@@ -5,6 +5,10 @@ type AppState = {
   activeTab: string;
   setActiveTab: (tab: string) => void;
 
+  // DYNAMICALLY SHOW STUFF ON MISC UTILITY PAGE BASED ON BUTTONS
+  miscTab: string;
+  setMiscTab: (tab: string) => void;
+
   // EMAIL REPORT
   emailReport: string | null;
   setEmailReport: (report: string | null) => void;
@@ -30,14 +34,28 @@ type AppState = {
 type FileStore = {
   selectedSourceFile: string | null;
   setSelectedSourceFile: (filePath: string | null) => void;
+
   selectedDirectory: string | null;
   setSelectedDirectory: (dirPath: string | null) => void;
+
+  outputDirectory: string | null;
+  setOutputDirectory: (dirPath: string | null) => void;
+
+  duplicateFiles: {
+    fileA?: string;
+    fileB?: string;
+  };
+  setDuplicateFile: (key: "fileA" | "fileB", file: string) => void;
 };
 
 export const useAppStore = create<AppState>((set) => ({
   // DYNAMICALLY SHOW STUFF ON PAGE BASED ON ACTIVE TAB
   activeTab: "listProcessing",
   setActiveTab: (tab) => set({ activeTab: tab }),
+
+  // DYNAMICALLY SHOW STUFF ON MISC UTILITY PAGE BASED ON BUTTONS
+  miscTab: "",
+  setMiscTab: (tab) => set({ miscTab: tab }),
 
   // EMAIL REPORT
   emailReport: null,
@@ -66,6 +84,16 @@ export const useAppStore = create<AppState>((set) => ({
 export const useFileStore = create<FileStore>((set) => ({
   selectedSourceFile: null,
   setSelectedSourceFile: (filePath) => set({ selectedSourceFile: filePath }),
+
   selectedDirectory: null,
   setSelectedDirectory: (dirPath) => set({ selectedDirectory: dirPath }),
+
+  outputDirectory: null,
+  setOutputDirectory: (dirPath) => set({ outputDirectory: dirPath }),
+
+  duplicateFiles: {},
+  setDuplicateFile: (key, file) =>
+    set((state) => ({
+      duplicateFiles: { ...state.duplicateFiles, [key]: file },
+    })),
 }));

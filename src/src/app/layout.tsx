@@ -3,8 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import { useAppStore } from "./store/store";
-import { DirectorySelector } from "./Custom_Components/DirectorySelector";
-import { SourceFileSelector } from "./Custom_Components/SourceFileSelector";
+import { DirectorySelector } from "./Custom_Components/DNC_Components/DirectorySelector";
+import { SourceFileSelector } from "./Custom_Components/DNC_Components/SourceFileSelector";
 import {
   Card,
   CardContent,
@@ -19,10 +19,11 @@ import {
   TabsList,
   TabsTrigger,
 } from "../components/ui/tabs";
-import { ExtractPhoneNumbersButton } from "./Custom_Components/ExtractPhoneNumbersButton";
-import { CreateFinalFileButton } from "./Custom_Components/CreateFinalFileButton";
-import { CreateDNCFileButton } from "./Custom_Components/CreateDNCFileButton";
-import { GenerateEmailReportButton } from "./Custom_Components/GenerateEmailReportButton";
+import { ExtractPhoneNumbersButton } from "./Custom_Components/DNC_Components/ExtractPhoneNumbersButton";
+import { CreateFinalFileButton } from "./Custom_Components/DNC_Components/CreateFinalFileButton";
+import { CreateDNCFileButton } from "./Custom_Components/DNC_Components/CreateDNCFileButton";
+import { GenerateEmailReportButton } from "./Custom_Components/DNC_Components/GenerateEmailReportButton";
+import { Sidebar } from "./Custom_Components/Page_Components/MiscUtility/Sidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,7 +40,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { setActiveTab } = useAppStore();
+  const { setActiveTab, setMiscTab } = useAppStore();
   return (
     <html lang="en">
       <body
@@ -52,8 +53,15 @@ export default function RootLayout({
             className="w-[600px] p-4"
           >
             <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="listProcessing">List Processing</TabsTrigger>
-              <TabsTrigger value="dncProcessing">DNC Processing</TabsTrigger>
+              <TabsTrigger
+                onClick={() => setMiscTab("")}
+                value="listProcessing"
+              >
+                List Processing
+              </TabsTrigger>
+              <TabsTrigger onClick={() => setMiscTab("")} value="dncProcessing">
+                DNC Processing
+              </TabsTrigger>
               <TabsTrigger value="miscUtilites">MISC Utilities</TabsTrigger>
             </TabsList>
 
@@ -106,7 +114,9 @@ export default function RootLayout({
                   <CardTitle>Work in Progress</CardTitle>
                   <CardDescription></CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-2"></CardContent>
+                <CardContent className="space-y-2">
+                  <Sidebar />
+                </CardContent>
                 <CardFooter></CardFooter>
               </Card>
             </TabsContent>
