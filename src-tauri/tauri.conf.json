@@ -24,6 +24,6 @@
   "bundle": {
     "active": true,
     "targets": "all",
-    "icon": ["icons/logoipsum-279.svg"]
+    "icon": ["icons/icon.ico"]
   }
 }
