@@ -21,7 +21,7 @@ export const ChunkCSV = ({ activeTab, listProcessingTab }: ChunkCSVProps) => {
 
   const handleChunk = async () => {
     try {
-      let result = (await invoke("chunk_csv_handler", {
+      const result = (await invoke("chunk_csv_handler", {
         inputFile: chunkFile,
         outputFolder: outputDirectory,
         maxLine,

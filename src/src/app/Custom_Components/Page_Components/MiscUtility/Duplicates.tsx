@@ -21,7 +21,7 @@ export const Duplicates = ({ activeTab, miscTab }: Props) => {
 
   const handleDuplicates = async () => {
     try {
-      let result = (await invoke("duplicates_handler", {
+      const result = (await invoke("duplicates_handler", {
         inputFile1: duplicateFiles.fileA,
         inputFile2: duplicateFiles.fileB,
         outputFile: `${outputDirectory}\\duplicates.csv`,
@@ -30,7 +30,7 @@ export const Duplicates = ({ activeTab, miscTab }: Props) => {
         `Duplicate file saved at: ${outputDirectory}\\duplicates.csv`
       );
 
-      let jsonResult = JSON.parse(result);
+      const jsonResult = JSON.parse(result);
       setDuplicateCount(jsonResult.duplicate_count);
       setFileOneCount(jsonResult.count_one);
       setFileTwoCount(jsonResult.count_two);

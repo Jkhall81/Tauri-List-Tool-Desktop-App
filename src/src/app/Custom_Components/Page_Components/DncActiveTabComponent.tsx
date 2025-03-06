@@ -37,8 +37,8 @@ export const DncActiveTabComponent = () => {
             <h1 className="mb-4 font-bold">Email Report Options</h1>
             <p className="mb-4 text-sm">
               Please select the proper dialer and enter the two letter campaign
-              designation &apos;'IR&apos;', &apos;'CK&apos;', or
-              &apos;'VA&apos;'.
+              designation &lsquo;IR&rsquo;, &lsquo;CK&rsquo;, or
+              &lsquo;VA&rsquo;.
             </p>
             <div>
               <Checkbox
