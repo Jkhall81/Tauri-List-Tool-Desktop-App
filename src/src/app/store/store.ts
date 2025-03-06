@@ -9,6 +9,10 @@ type AppState = {
   miscTab: string;
   setMiscTab: (tab: string) => void;
 
+  // DYNAMICALLY SHOW STUFF ON LIST PROCESSING PAGE
+  listProcessingTab: string;
+  setListProcessingTab: (tab: string) => void;
+
   // EMAIL REPORT
   emailReport: string | null;
   setEmailReport: (report: string | null) => void;
@@ -41,6 +45,9 @@ type FileStore = {
   outputDirectory: string | null;
   setOutputDirectory: (dirPath: string | null) => void;
 
+  chunkFile: string | null;
+  setChunkFile: (filepath: string | null) => void;
+
   duplicateFiles: {
     fileA?: string;
     fileB?: string;
@@ -56,6 +63,10 @@ export const useAppStore = create<AppState>((set) => ({
   // DYNAMICALLY SHOW STUFF ON MISC UTILITY PAGE BASED ON BUTTONS
   miscTab: "",
   setMiscTab: (tab) => set({ miscTab: tab }),
+
+  // DYNAMICALLY SHOW STUFF ON LIST PROCESSING PAGE
+  listProcessingTab: "",
+  setListProcessingTab: (tab) => set({ listProcessingTab: tab }),
 
   // EMAIL REPORT
   emailReport: null,
@@ -90,6 +101,9 @@ export const useFileStore = create<FileStore>((set) => ({
 
   outputDirectory: null,
   setOutputDirectory: (dirPath) => set({ outputDirectory: dirPath }),
+
+  chunkFile: null,
+  setChunkFile: (filepath) => set({ chunkFile: filepath }),
 
   duplicateFiles: {},
   setDuplicateFile: (key, file) =>

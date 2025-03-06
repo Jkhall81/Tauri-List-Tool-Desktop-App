@@ -3,7 +3,7 @@ import { Button } from "../../../../components/ui/button";
 import { useFileStore } from "../../../store/store";
 import { open } from "@tauri-apps/plugin-dialog";
 
-export const OutputDirSelector = () => {
+export const MiscOutputDirSelector = () => {
   const { outputDirectory, setOutputDirectory } = useFileStore();
 
   // GETTING SOURCE FILE DIRECTORY

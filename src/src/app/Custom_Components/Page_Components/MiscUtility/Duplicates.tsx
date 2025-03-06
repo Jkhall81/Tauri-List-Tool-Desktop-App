@@ -1,8 +1,8 @@
 "use client";
 
 import { Button } from "../../../../components/ui/button";
-import { FileSelector } from "./FileSelector";
-import { OutputDirSelector } from "./OutputDirSelector";
+import { MiscFileSelector } from "./MiscFileSelector";
+import { MiscOutputDirSelector } from "./MiscOutputDirSelector";
 import { useFileStore } from "@/app/store/store";
 import { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
@@ -58,7 +58,7 @@ export const Duplicates = ({ activeTab, miscTab }: Props) => {
           </p>
           <div className="space-y-2">
             <h2 className="font-bold">File A</h2>
-            <FileSelector
+            <MiscFileSelector
               buttonText="Select File A"
               fileType="File A"
               fileKey="fileA"
@@ -66,7 +66,7 @@ export const Duplicates = ({ activeTab, miscTab }: Props) => {
           </div>
           <div className="space-y-2">
             <h2 className="font-bold">File B</h2>
-            <FileSelector
+            <MiscFileSelector
               buttonText="Select File B"
               fileType="File B"
               fileKey="fileB"
@@ -74,7 +74,7 @@ export const Duplicates = ({ activeTab, miscTab }: Props) => {
           </div>
           <div className="space-y-2">
             <h2 className="font-bold">Select Output Directory</h2>
-            <OutputDirSelector />
+            <MiscOutputDirSelector />
           </div>
           <Button
             className=""

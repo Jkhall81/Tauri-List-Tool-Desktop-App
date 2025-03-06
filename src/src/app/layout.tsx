@@ -23,7 +23,8 @@ import { ExtractPhoneNumbersButton } from "./Custom_Components/DNC_Components/Ex
 import { CreateFinalFileButton } from "./Custom_Components/DNC_Components/CreateFinalFileButton";
 import { CreateDNCFileButton } from "./Custom_Components/DNC_Components/CreateDNCFileButton";
 import { GenerateEmailReportButton } from "./Custom_Components/DNC_Components/GenerateEmailReportButton";
-import { Sidebar } from "./Custom_Components/Page_Components/MiscUtility/Sidebar";
+import { MiscSidebar } from "./Custom_Components/Page_Components/MiscUtility/MiscSidebar";
+import { ListPSidebar } from "./Custom_Components/Page_Components/ListProcessing/ListPSidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,7 +41,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { setActiveTab, setMiscTab } = useAppStore();
+  const { setActiveTab, setMiscTab, setListProcessingTab } = useAppStore();
   return (
     <html lang="en">
       <body
@@ -59,20 +60,33 @@ export default function RootLayout({
               >
                 List Processing
               </TabsTrigger>
-              <TabsTrigger onClick={() => setMiscTab("")} value="dncProcessing">
+              <TabsTrigger
+                onClick={() => {
+                  setMiscTab("");
+                  setListProcessingTab("");
+                }}
+                value="dncProcessing"
+              >
                 DNC Processing
               </TabsTrigger>
-              <TabsTrigger value="miscUtilites">MISC Utilities</TabsTrigger>
+              <TabsTrigger
+                onClick={() => setListProcessingTab("")}
+                value="miscUtilites"
+              >
+                MISC Utilities
+              </TabsTrigger>
             </TabsList>
 
             {/* LIST PROCESSING TAB CONTENT */}
             <TabsContent value="listProcessing">
               <Card>
                 <CardHeader>
-                  <CardTitle>Work in Progress</CardTitle>
+                  <CardTitle>Tools For Preparing Lists for Upload</CardTitle>
                   <CardDescription></CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-2"></CardContent>
+                <CardContent className="space-y-2">
+                  <ListPSidebar />
+                </CardContent>
                 <CardFooter></CardFooter>
               </Card>
             </TabsContent>
@@ -111,11 +125,11 @@ export default function RootLayout({
             <TabsContent value="miscUtilites">
               <Card>
                 <CardHeader>
-                  <CardTitle>Work in Progress</CardTitle>
+                  <CardTitle>Miscellaneous List Utilities</CardTitle>
                   <CardDescription></CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  <Sidebar />
+                  <MiscSidebar />
                 </CardContent>
                 <CardFooter></CardFooter>
               </Card>

@@ -10,7 +10,7 @@ import { Button } from "../../../../components/ui/button";
 import { useFileStore } from "../../../store/store";
 import { open } from "@tauri-apps/plugin-dialog";
 
-export const FileSelector = ({ buttonText, fileType, fileKey }: Props) => {
+export const MiscFileSelector = ({ buttonText, fileType, fileKey }: Props) => {
   const { duplicateFiles, setDuplicateFile } = useFileStore();
 
   // GETTING SOURCE FILE

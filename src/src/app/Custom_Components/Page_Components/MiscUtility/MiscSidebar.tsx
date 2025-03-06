@@ -1,9 +1,9 @@
 "use client";
 
-import { useAppStore } from "../../../../app/store/store";
+import { useAppStore } from "../../../store/store";
 import { Button } from "../../../../components/ui/button";
 
-export const Sidebar = () => {
+export const MiscSidebar = () => {
   const { setMiscTab, miscTab } = useAppStore();
   console.log(miscTab);
   return (
