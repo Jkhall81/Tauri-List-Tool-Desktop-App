@@ -1,6 +1,6 @@
 "use client";
 
-import { useAppStore } from "@/app/store/store";
+import { useAppStore } from "../.././../app/store/store";
 import { ChunkCSV } from "./ListProcessing/ChunkCSV";
 import { ListPIntro } from "./ListProcessing/ListPIntro";
 

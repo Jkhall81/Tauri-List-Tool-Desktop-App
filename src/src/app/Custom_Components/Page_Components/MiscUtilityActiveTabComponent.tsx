@@ -1,6 +1,6 @@
 "use client";
 
-import { useAppStore } from "@/app/store/store";
+import { useAppStore } from "../../../app/store/store";
 import { MiscIntro } from "./MiscUtility/MiscIntro";
 import { Duplicates } from "./MiscUtility/Duplicates";
 import { MultiFileDuplicates } from "./MiscUtility/MultiFileDuplicates";

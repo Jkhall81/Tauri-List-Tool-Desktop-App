@@ -3,7 +3,7 @@
 import { Button } from "../../../../components/ui/button";
 import { MiscFileSelector } from "./MiscFileSelector";
 import { MiscOutputDirSelector } from "./MiscOutputDirSelector";
-import { useFileStore } from "@/app/store/store";
+import { useFileStore } from "../../../../app/store/store";
 import { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 

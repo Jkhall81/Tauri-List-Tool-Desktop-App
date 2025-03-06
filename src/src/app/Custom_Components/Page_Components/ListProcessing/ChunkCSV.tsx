@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { ListPFileSelector } from "./ListPFileSelector";
 import { ListPOutputDirSelector } from "./ListPOutputDirSelector";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Input } from "../../../../components/ui/input";
+import { Button } from "../../../../components/ui/button";
 import { invoke } from "@tauri-apps/api/core";
-import { useFileStore } from "@/app/store/store";
+import { useFileStore } from "../../../../app/store/store";
 
 interface ChunkCSVProps {
   activeTab: string;
