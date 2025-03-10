@@ -7,6 +7,7 @@ mod dnc_file;
 mod generate_email_report;
 mod duplicates;
 mod chunk_csv;
+mod chunk_txt;
 
 // DNC TAB 
 #[tauri::command]
@@ -62,12 +63,18 @@ fn chunk_csv_handler(input_file: &str, output_folder: &str, max_line: usize, sta
     }
 }
 
+#[tauri::command]
+fn chunk_txt_handler(input_file: &str, numbers_per_file: usize, output_dir: &str) -> Result<String, String> {
+    chunk_txt::chunk_txt_file(&input_file, numbers_per_file, &output_dir).map(|_| "Chunks generated successfully.".to_string())
+    .map_err(|e| e.to_string())
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![duplicates_handler, extract_numbers_from_file, final_file_handler, dnc_file_handler, email_report_handler, chunk_csv_handler])
+        .invoke_handler(tauri::generate_handler![duplicates_handler, extract_numbers_from_file, final_file_handler, dnc_file_handler, email_report_handler, chunk_csv_handler, chunk_txt_handler])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

@@ -2,7 +2,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import { useAppStore } from "./store/store";
+import { useAppStore, useFileStore } from "./store/store";
 import { DirectorySelector } from "./Custom_Components/DNC_Components/DirectorySelector";
 import { SourceFileSelector } from "./Custom_Components/DNC_Components/SourceFileSelector";
 import {
@@ -42,6 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const { setActiveTab, setMiscTab, setListProcessingTab } = useAppStore();
+  const { setSelectedDirectory, setSelectedSourceFile } = useFileStore();
   return (
     <html lang="en">
       <body
@@ -55,7 +56,11 @@ export default function RootLayout({
           >
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger
-                onClick={() => setMiscTab("")}
+                onClick={() => {
+                  setMiscTab("");
+                  setSelectedDirectory("");
+                  setSelectedSourceFile("");
+                }}
                 value="listProcessing"
               >
                 List Processing
@@ -64,13 +69,19 @@ export default function RootLayout({
                 onClick={() => {
                   setMiscTab("");
                   setListProcessingTab("");
+                  setSelectedDirectory("");
+                  setSelectedSourceFile("");
                 }}
                 value="dncProcessing"
               >
                 DNC Processing
               </TabsTrigger>
               <TabsTrigger
-                onClick={() => setListProcessingTab("")}
+                onClick={() => {
+                  setListProcessingTab("");
+                  setSelectedDirectory("");
+                  setSelectedSourceFile("");
+                }}
                 value="miscUtilites"
               >
                 MISC Utilities

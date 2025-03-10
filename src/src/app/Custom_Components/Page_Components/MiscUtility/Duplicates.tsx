@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const Duplicates = ({ activeTab, miscTab }: Props) => {
-  const { duplicateFiles, outputDirectory } = useFileStore();
+  const { duplicateFiles, setDuplicateFile, outputDirectory } = useFileStore();
   const [createDuplicateMessage, setCreateDuplicateMessage] = useState("");
   const [duplicateCount, setDuplicateCount] = useState("");
   const [fileOneCount, setFileOneCount] = useState("");
@@ -77,12 +77,11 @@ export const Duplicates = ({ activeTab, miscTab }: Props) => {
             <MiscOutputDirSelector />
           </div>
           <Button
-            className=""
+            className="w-full"
             onClick={handleDuplicates}
             disabled={
               !duplicateFiles.fileA || !duplicateFiles.fileB || !outputDirectory
             }
-            variant="outline"
           >
             Find Duplicates
           </Button>

@@ -1,21 +1,58 @@
 "use client";
 
-import { useAppStore } from "../../../store/store";
+import { useAppStore, useFileStore } from "../../../store/store";
 import { Button } from "../../../../components/ui/button";
 
 export const MiscSidebar = () => {
   const { setMiscTab, miscTab } = useAppStore();
+  const { setSelectedDirectory, setSelectedSourceFile } = useFileStore();
   console.log(miscTab);
   return (
     <div className="flex flex-col space-y-2">
       <Button onClick={() => setMiscTab("duplicates")}>Duplicates</Button>
-      <Button onClick={() => setMiscTab("multifileduplicates")}>
+      <Button
+        onClick={() => {
+          setMiscTab("multifileduplicates");
+          setSelectedDirectory("");
+          setSelectedSourceFile("");
+        }}
+      >
         MultiFile Duplicates
       </Button>
-      <Button onClick={() => setMiscTab("chunking")}>Chunking</Button>
-      <Button onClick={() => setMiscTab("csvtoxlsx")}>CSV to XLSX</Button>
-      <Button onClick={() => setMiscTab("xlsxtocsv")}>XLSX to CSV</Button>
-      <Button onClick={() => setMiscTab("formatrowsasstring")}>
+      <Button
+        onClick={() => {
+          setMiscTab("chunking");
+          setSelectedDirectory("");
+          setSelectedSourceFile("");
+        }}
+      >
+        Chunking
+      </Button>
+      <Button
+        onClick={() => {
+          setMiscTab("csvtoxlsx");
+          setSelectedDirectory("");
+          setSelectedSourceFile("");
+        }}
+      >
+        CSV to XLSX
+      </Button>
+      <Button
+        onClick={() => {
+          setMiscTab("xlsxtocsv");
+          setSelectedDirectory("");
+          setSelectedSourceFile("");
+        }}
+      >
+        XLSX to CSV
+      </Button>
+      <Button
+        onClick={() => {
+          setMiscTab("formatrowsasstring");
+          setSelectedDirectory("");
+          setSelectedSourceFile("");
+        }}
+      >
         Format Rows as String
       </Button>
     </div>
