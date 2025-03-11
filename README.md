@@ -38,7 +38,7 @@ When using Nextjs, like in this project, make sure that your tauri.conf.json loo
 
 ## Developing the application
 
-While developing you will need to dev servers up. If you are just working on the front end you just need to cd into the src folder, where the front end is, and run npm run dev or bun run dev.
+While developing you will need two dev servers up. If you are just working on the front end you just need to cd into the src folder, where the front end is, and run npm run dev or bun run dev.
 
 If you are testing out your backend logic then you need your front end dev server running, and also in another terminal cd into the src-tauri folder and run npm tauri run dev.
 
