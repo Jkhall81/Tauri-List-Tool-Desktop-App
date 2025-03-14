@@ -4,6 +4,7 @@ use std::path::Path;
 use std::error::Error;
 use regex::Regex;
 use csv::WriterBuilder;
+use std::collections::HashMap;
 
 
 pub fn generate_dnc_file(output_dir: &str, source_file: &str) -> Result<(), Box<dyn Error>> {
@@ -21,13 +22,12 @@ pub fn generate_dnc_file(output_dir: &str, source_file: &str) -> Result<(), Box<
         .next()
         .ok_or("No extractedNumbers file found")?;
 
-
     // Final file format
     let source_file_name = Path::new(source_file)
-    .file_name()
-    .unwrap_or_default()
-    .to_str()
-    .unwrap_or_default();
+        .file_name()
+        .unwrap_or_default()
+        .to_str()
+        .unwrap_or_default();
 
     let final_output_file = format!("{}\\DNC_{}", output_dir, source_file_name.replace("Source_", ""));
 
@@ -37,55 +37,53 @@ pub fn generate_dnc_file(output_dir: &str, source_file: &str) -> Result<(), Box<
     let invalid_file = format!("{}\\invalid.csv", output_dir);
     let no_carrier_file = format!("{}\\no_carrier.csv", output_dir);
 
-    // println!("Attempting to open all_clean file: {}", all_clean_file);
-    // println!("Attempting to open federal_dnc file: {}", fdnc_file);
-    // println!("Attempting to open invalid file: {}", invalid_file);
-    // println!("Attempting to open no_carrier file: {}", no_carrier_file);
-    // println!("Attempting to create final output file: {}", final_output_file);
-   
-
     // Hashmaps
-    let fdnc = read_csv_to_phone_map(&fdnc_file)?;
-    let invalid = read_csv_to_phone_map(&invalid_file)?;
-    let no_carrier = read_csv_to_phone_map(&no_carrier_file)?;
-    let dnc = filter_dnc_numbers(&extracted_file, &all_clean_file, &fdnc_file, &invalid_file)?;
+    let fdnc: HashMap<String, u32> = read_csv_to_phone_map(&fdnc_file)?;
+    let invalid: HashMap<String, u32> = read_csv_to_phone_map(&invalid_file)?;
+    let no_carrier: HashMap<String, u32> = read_csv_to_phone_map(&no_carrier_file)?;
+    let dnc: HashMap<String, u32> = filter_dnc_numbers(&extracted_file, &all_clean_file, &fdnc_file, &invalid_file)?;
 
-    // Flattening the values from each collection (values from the hashmaps)
-    let fdnc: Vec<String> = fdnc.keys().cloned().collect();
-    let dnc: Vec<String> = dnc.keys().cloned().collect();
-    let invalid: Vec<String> = invalid.keys().cloned().collect();
-    let no_carrier: Vec<String> = no_carrier.keys().cloned().collect();
+    // Function to expand phone numbers based on their counts
+    let expand_phone_numbers = |map: &HashMap<String, u32>| -> Vec<String> {
+        let mut expanded = Vec::new();
+        for (phone_number, count) in map {
+            for _ in 0..*count {
+                expanded.push(phone_number.clone());
+            }
+        }
+        expanded
+    };
+
+    // Expand phone numbers for each category
+    let fdnc_expanded = expand_phone_numbers(&fdnc);
+    let dnc_expanded = expand_phone_numbers(&dnc);
+    let invalid_expanded = expand_phone_numbers(&invalid);
+    let no_carrier_expanded = expand_phone_numbers(&no_carrier);
+
+    // Determine the maximum length of the columns
+    let max_len = vec![fdnc_expanded.len(), dnc_expanded.len(), invalid_expanded.len(), no_carrier_expanded.len()]
+        .into_iter()
+        .max()
+        .unwrap_or(0);
 
     // Open Writer
     let mut wtr = WriterBuilder::new().from_path(&final_output_file)?;
     wtr.write_record(&["FDNC", "DNC", "Invalid", "No Carrier"])?;
 
-    // Preparing rows
-    let max_rows = fdnc.len()
-        .max(dnc.len())
-        .max(invalid.len())
-        .max(no_carrier.len());
+    // Write phone numbers to the CSV file
+    for i in 0..max_len {
+        let mut record = Vec::new();
 
-        for i in 0..max_rows {
-            let mut row = vec![""; 4];  // Initialize the row with empty values
-        
-            // Fill the row with values from the corresponding columns (if available)
-            if i < fdnc.len() {
-                row[0] = &fdnc[i];
-            }
-            if i < dnc.len() {
-                row[1] = &dnc[i];
-            }
-            if i < invalid.len() {
-                row[2] = &invalid[i];
-            }
-            if i < no_carrier.len() {
-                row[3] = &no_carrier[i];
-            }
-        
-            // Write the row to the CSV
-            wtr.write_record(&row)?;
-        }
+        // Extract values from each collection, or empty string if out of bounds
+        record.push(fdnc_expanded.get(i).unwrap_or(&"".to_string()).clone());
+        record.push(dnc_expanded.get(i).unwrap_or(&"".to_string()).clone());
+        record.push(invalid_expanded.get(i).unwrap_or(&"".to_string()).clone());
+        record.push(no_carrier_expanded.get(i).unwrap_or(&"".to_string()).clone());
+
+        // Write the record to the CSV
+        wtr.write_record(&record)?;
+    }
+
     println!("Final report generated at '{}'", final_output_file);
     Ok(())
 }
