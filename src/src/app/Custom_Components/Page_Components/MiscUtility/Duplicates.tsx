@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const Duplicates = ({ activeTab, miscTab }: Props) => {
-  const { duplicateFiles, setDuplicateFile, outputDirectory } = useFileStore();
+  const { duplicateFiles, outputDirectory } = useFileStore();
   const [createDuplicateMessage, setCreateDuplicateMessage] = useState("");
   const [duplicateCount, setDuplicateCount] = useState("");
   const [fileOneCount, setFileOneCount] = useState("");

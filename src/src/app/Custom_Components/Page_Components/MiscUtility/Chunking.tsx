@@ -1,10 +1,10 @@
 import { SourceFileSelector } from "../../DNC_Components/SourceFileSelector";
 import { DirectorySelector } from "../../DNC_Components/DirectorySelector";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "../../../../components/ui/button";
+import { Input } from "../../../../components/ui/input";
 import { invoke } from "@tauri-apps/api/core";
 import { useState } from "react";
-import { useFileStore } from "@/app/store/store";
+import { useFileStore } from "../../../../app/store/store";
 
 interface Props {
   activeTab: string;
@@ -21,6 +21,7 @@ export const Chunking = ({ activeTab, miscTab }: Props) => {
         numbersPerFile: maxLine,
         outputDir: selectedDirectory,
       });
+      console.log(result);
     } catch (error) {
       console.error(error);
     }
@@ -47,7 +48,9 @@ export const Chunking = ({ activeTab, miscTab }: Props) => {
               className="mt-2"
               id="maxlines"
               value={maxLine}
-              onChange={(e) => setMaxLine(+e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setMaxLine(+e.target.value)
+              }
             />
           </div>
           <div className="flex flex-col gap-y-2">

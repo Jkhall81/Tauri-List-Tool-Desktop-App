@@ -44,4 +44,4 @@ If you are testing out your backend logic then you need your front end dev serve
 
 ## Building the application
 
-Build your front end first. Note, tauri doesn't like the @/ used in nextjs imports. Once your front end is built, cd into the src-tauri folder and run npm run build. This will give you a .exe file and a msi installer, if you are using windows.
+Build your front end first. Note, tauri doesn't like the @/ used in nextjs imports. Once your front end is built, cd into the src-tauri folder and execute npm run tauri build. This will give you a .exe file and a msi installer, if you are using windows.
